@@ -3,17 +3,14 @@ const db = require('../database');
 const error = require('../utils').Exception;
 
 class SkillService {
-   getSkills(result) {
-     skill.find({}, function(err, skills) {
-       if (err) throw err;
-       result(skills);
-     });
+   async getSkills() {
+     const skills = await skill.find({});
+     return skills;
    }
 
-   addSkill(data, result) {
-     skill.create(data)
-      .then(res => result(res))
-      .catch(err => result(err));
+   async addSkill(data) {
+     const result = await skill.create(data);
+     return result;
    }
 }
 

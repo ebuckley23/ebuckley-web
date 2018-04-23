@@ -3,10 +3,9 @@ const router = express.Router();
 const authenticationService = require('../services/authenticate');
 
 router.route('/')
-  .post((req, res) => {
-    authenticationService.login(req.body, (ret) => {
-      res.json(ret);
-    });
+  .post(async (req, res) => {
+    const token = await authenticationService.login(req.body);
+    res.json(token);
   });
 
 router.get('/context', (req, res) => {

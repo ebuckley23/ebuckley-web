@@ -28,21 +28,33 @@ schema.virtual('fullName').get(function() {
 });
 
 // https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
-schema.pre('save', function(next) {
-  const user = this;
+schema.pre('save', async function(next) {
+  try {
+    const user = this;
 
-  if(!user.isModified('password')) return next();
+    if(!user.isModified('password')) return next();
 
-  // lets get salty
-  bcrypt.genSalt(Number(process.env.SALT_WORK_FACTOR), function(err, salt) {
-    if (err) return next(error);
-    // salt + hash
-    bcrypt.hash(user.password, salt, function(err, hash) {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    });
-  });
+    const salt = await bcrypt.genSalt(Number(process.env.SALT_WORK_FACTOR));
+
+    const hash = await bcrypt.hash(user.password, salt);
+
+    user.password = hash;
+
+    return next();
+  } catch(e) {
+    return next(e);
+  }
+
+  // // lets get salty
+  // bcrypt.genSalt(Number(process.env.SALT_WORK_FACTOR), function(err, salt) {
+  //   if (err) return next(error);
+  //   // salt + hash
+  //   bcrypt.hash(user.password, salt, function(err, hash) {
+  //     if (err) return next(err);
+  //     user.password = hash;
+  //     next();
+  //   });
+  // });
 });
 
 schema.methods.verifyPassword = function(pw, cb) {

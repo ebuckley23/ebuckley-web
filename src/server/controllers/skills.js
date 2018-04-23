@@ -3,15 +3,13 @@ const router = express.Router();
 const skillService = require('../services/skill');
 
 router.route('/')
-  .get((req, res) => {
-    skillService.getSkills((skills) => {
-      res.json(skills);
-    });
+  .get(async (req, res) => {
+    const ret = await skillService.getSkills();
+    res.json(ret);
   })
-  .post((req, res) => {
-    skillService.addSkill(req.body, (ret) => {
-      res.json(ret);
-    });
+  .post(async (req, res) => {
+    const ret = await skillService.addSkill(req.body);
+    res.json(ret);
   });
 
 module.exports = router;

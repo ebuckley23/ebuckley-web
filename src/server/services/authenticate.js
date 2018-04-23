@@ -4,17 +4,21 @@ const subscriber = require('../models/subscriber');
 const jwt = require('jsonwebtoken');
 
 class Authenticate {
-  login({email, password}, result) {
-    subscriberService.getSubscriber({email, password}, (user) => {
-      user.verifyPassword(password, function(err, isMatch) {
-        if (err) throw err;
-        if (isMatch) {
-          result({token: jwt.sign({email: user.email, fullName: user.fullName, _id: user._id, isAdmin: user.admin}, process.env.SECRET_KEY)});
-        } else {
-          result({message: 'Unauthorized'});
-        }
-      })
-    })
+   /**
+   * Login method that authenticates a subscriber and returns
+   * a jwt token
+   * @param email email object property
+   * @param password password object property
+   */
+  async login({email, password}) {
+    const user = await subscriberService.getSubscriber({email, password}); 
+    const verified = await user.verifyPassword(password);
+
+    if (verified) {
+      return {token: jwt.sign({email: user.email, fullName: user.fullName, _id: user._id, isAdmin: user.admin}, process.env.SECRET_KEY)};
+    } else {
+      return {message: 'Unauthorized'}
+    }
   }
 }
 
