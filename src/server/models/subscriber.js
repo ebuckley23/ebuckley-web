@@ -44,25 +44,11 @@ schema.pre('save', async function(next) {
   } catch(e) {
     return next(e);
   }
-
-  // // lets get salty
-  // bcrypt.genSalt(Number(process.env.SALT_WORK_FACTOR), function(err, salt) {
-  //   if (err) return next(error);
-  //   // salt + hash
-  //   bcrypt.hash(user.password, salt, function(err, hash) {
-  //     if (err) return next(err);
-  //     user.password = hash;
-  //     next();
-  //   });
-  // });
 });
 
-schema.methods.verifyPassword = function(pw, cb) {
-  bcrypt.compare(pw, this.password, function(err, isMatch) {
-    if(err) return cb(err);
-
-    cb(null, isMatch);
-  });
+schema.methods.verifyPassword = async function(pw, cb) {
+  const isMatch = await bcrypt.compare(pw, this.password);
+  return isMatch;
 };
 
 schema.plugin(plugins.timestamp);
