@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const controllers = require('./controllers');
 const {
   ebuckleyController,
@@ -42,5 +43,10 @@ app.use('/api/admin', (req, res, next) => {
     return res.status(401).json({message: 'Unauthorized'});
   }
 }, adminController);
+
+//catch-all fallback route for spa
+app.use('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
+})
 
 app.listen(process.env.PORT || 8080, () => console.log('success'));

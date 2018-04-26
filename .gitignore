@@ -263,5 +263,5 @@ __pycache__/
 #user options
 .vscode
 
-**/wwwroot/dist
+**/dist
 .env
