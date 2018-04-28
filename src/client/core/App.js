@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import {Provider} from 'react-redux';
 import rootReducer from '../reducers';
@@ -12,8 +12,9 @@ const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
 const configureStore = (initialState) => {
   return createStore(
     rootReducer,
-    applyMiddleware(promiseMiddleware()),
-    process.env.NODE_ENV === 'development' ? reduxDevTools : undefined
+    process.env.NODE_ENV === 'development'
+      ? compose(applyMiddleware(promiseMiddleware()), reduxDevTools)
+      : applyMiddleware(promiseMiddleware())
     );
 }
 export default class App extends PureComponent {
