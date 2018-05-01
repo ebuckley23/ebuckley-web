@@ -4,7 +4,11 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import {Provider} from 'react-redux';
 import rootReducer from '../reducers';
+import {ThemeProvider} from 'styled-components';
+import {appMode} from '../constants';
+import AsyncComponent from './components/AsyncComponent';
 
+const MyStyleGuide = AsyncComponent(_ => import('../my-style-guide'));
 const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
   : _ => _;
@@ -17,24 +21,21 @@ const configureStore = (initialState) => {
       : applyMiddleware(promiseMiddleware())
     );
 }
+
 export default class App extends PureComponent {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Router>
-          <Switch>
-          <Route exact path='/' render={(props) => {
-            return (
-              <div>React routing in progress</div>
-            )
-          }} />
-          <Route path='/test' render={(props) => {
-            return (
-              <div>Test Route</div>
-            )
-          }} />
-          </Switch>
-        </Router>
+        <ThemeProvider theme={{mode: appMode.dark}}>
+          <Router>
+            <Switch>
+            <Route exact path='/' render={(props) => {
+              return (<div>Test Page</div>)
+            }} />
+            <Route exact path='/my-style-guide' component={MyStyleGuide} />
+            </Switch>
+          </Router>
+        </ThemeProvider>
       </Provider>
     )
   }

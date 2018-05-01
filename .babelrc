@@ -1,7 +1,8 @@
 {
   "plugins": [
     "@babel/plugin-proposal-object-rest-spread",
-    ["import", {"libraryName": "antd", "style": true}]
+    ["syntax-dynamic-import"],
+    ["transform-class-properties"]
   ],
   "presets": [
     ["@babel/env", {
