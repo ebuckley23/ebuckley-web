@@ -1,27 +1,28 @@
 import React, {PureComponent} from 'react';
-import {Button} from '../common';
+import {Button, Input, Text, Container} from '../common';
 import {themeVariantTypes} from '../constants';
 import * as styleGuideActions from '../actions/my-style-guide';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import renderStyles from './styles';
 
 export class MyStyleGuide extends PureComponent {
   render() {
     const {mode, web, actions} = this.props;
+    const ButtonStyles = renderStyles(Button);
+    const InputStyles = renderStyles(Input);
+    const TextStyles = renderStyles(Text);
     return (
-      <>
-        <h1>Style Guide and Themes</h1>
-        <button onClick={() => actions.changeMode('dark')}>{`Theme - ${web.mode}`}</button>
-        <h2>Buttons</h2>
-        {Object.values(themeVariantTypes).map((variant, idx) => {
-          return (
-            <div key={idx}>
-              <label>{variant}</label>
-              <Button {...{variant}}>TEXT</Button>
-            </div>
-          )
-        })}
-      </>
+      <Container>
+        <Text.H1>Style Guide and Themes</Text.H1>
+        <button onClick={() => actions.changeMode()}>{`Theme - ${web.mode}`}</button>
+        <Text.H2>Buttons</Text.H2>
+        <ButtonStyles>A Button!</ButtonStyles>
+        <Text.H2>Input</Text.H2>
+        <InputStyles placeholder={'Enter Text'}/>
+        <Text.H2>Text</Text.H2>
+        <TextStyles>Emmanuel</TextStyles>
+      </Container>
     );
   }
 }

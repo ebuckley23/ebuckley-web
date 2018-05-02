@@ -20,6 +20,8 @@ export const media = Object.keys(mediaSizes).reduce((acc, label) => {
 export const themeVariantTypes = {
   default: 'default',
   primary: 'primary',
+  secondary: 'secondary',
+  tertiary: 'tertiary',
   success: 'success',
   warning: 'warning',
   error: 'error'

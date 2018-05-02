@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from 'styled-theming';
 import PropTypes from 'prop-types';
-import {themeVariantTypes} from '../constants';
-import colors from './colors';
+import {themeVariantTypes} from '../../constants';
+import colors from '../colors';
 
 const {
   white,
@@ -24,6 +24,14 @@ const bgColor = theme.variants('mode', 'variant', {
   [themeVariantTypes.error]: {light: white, dark: black}
 });
 
+const borderColor = theme.variants('mode', 'variant', {
+  [themeVariantTypes.default]: {light: black, dark: white},
+  [themeVariantTypes.primary]: {light: blue, dark: grey},
+  [themeVariantTypes.success]: {light: green, dark: green},
+  [themeVariantTypes.warning]: {light: yellow, dark: yellow},
+  [themeVariantTypes.error]: {light: red, dark: red}
+});
+
 const fgColor = theme.variants('mode', 'variant', {
   [themeVariantTypes.default]: {light: black, dark: white},
   [themeVariantTypes.primary]: {light: blue, dark: grey},
@@ -32,23 +40,27 @@ const fgColor = theme.variants('mode', 'variant', {
   [themeVariantTypes.error]: {light: red, dark: red}
 });
 
-const StyledButton = styled.button`
-  color: ${props => props.color || fgColor};
+const StyledInput = styled.input`
+  color: ${fgColor};
   background-color: ${bgColor};
-  width: 5em;
-  height: 5em;
+  border: solid ${borderColor};
 `;
 
-StyledButton.propTypes = {
+StyledInput.propTypes = {
   variant: PropTypes.oneOf(Object.values(themeVariantTypes))
 }
 
-StyledButton.defaultProps = {
+StyledInput.defaultProps = {
   variant: themeVariantTypes.default
 }
 
-export default ({children, color, onClick, variant}) => (
-  <StyledButton {...{color, onClick, variant}}>
-    {children}
-  </StyledButton>
-);
+export default ({onChange, variant, value, placeholder}) => {
+  return (
+    <StyledInput {...{
+      onChange,
+      variant,
+      value,
+      placeholder
+    }} />
+  )
+}

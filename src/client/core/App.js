@@ -4,7 +4,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import {Provider} from 'react-redux';
 import rootReducer from '../reducers';
-import {ThemeProvider} from 'styled-components';
+import Theme from './components/Theme';
 import {appMode} from '../constants';
 import AsyncComponent from './components/AsyncComponent';
 
@@ -26,16 +26,20 @@ export default class App extends PureComponent {
   render() {
     return (
       <Provider store={configureStore()}>
-        <ThemeProvider theme={{mode: appMode.dark}}>
-          <Router>
-            <Switch>
-            <Route exact path='/' render={(props) => {
-              return (<div>Test Page</div>)
-            }} />
-            <Route exact path='/my-style-guide' component={MyStyleGuide} />
-            </Switch>
-          </Router>
-        </ThemeProvider>
+        <Router>
+          <Route render={(props) => {
+            return (
+              <Theme {...props}>
+                <Switch>
+                  <Route exact path='/' render={(props) => {
+                    return (<div>Test Page</div>)
+                  }} />
+                  <Route exact path='/my-style-guide' component={MyStyleGuide} />
+                </Switch>
+              </Theme>
+            )
+          }} />
+        </Router>
       </Provider>
     )
   }

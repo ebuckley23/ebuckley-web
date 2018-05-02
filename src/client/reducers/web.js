@@ -4,7 +4,9 @@ import * as actionTypes from '../constants/actionTypes';
 export default (state = getInitialState(), action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STYLE_GUIDE_MODE: {
-      return {...state, mode: action.payload};
+      //todo: drive by dropdown
+      const mode = state.mode === appMode.light ? appMode.dark : appMode.light;
+      return {...state, mode};
     }
     default: return state;
   }
