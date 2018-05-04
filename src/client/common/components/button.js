@@ -17,38 +17,47 @@ const {
 } = colors;
 
 const bgColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: white, dark: black},
-  [themeVariantTypes.primary]: {light: white, dark: black},
-  [themeVariantTypes.success]: {light: white, dark: black},
-  [themeVariantTypes.warning]: {light: white, dark: black},
-  [themeVariantTypes.error]: {light: white, dark: black}
+  default: {light: white, dark: black},
+  primary: {light: white, dark: black},
+  success: {light: white, dark: black},
+  warning: {light: white, dark: black},
+  error: {light: white, dark: black}
 });
 
 const fgColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: black, dark: white},
-  [themeVariantTypes.primary]: {light: blue, dark: grey},
-  [themeVariantTypes.success]: {light: green, dark: green},
-  [themeVariantTypes.warning]: {light: yellow, dark: yellow},
-  [themeVariantTypes.error]: {light: red, dark: red}
+  default: {light: black, dark: white},
+  primary: {light: blue, dark: grey},
+  success: {light: green, dark: green},
+  warning: {light: yellow, dark: yellow},
+  error: {light: red, dark: red}
 });
 
 const StyledButton = styled.button`
   color: ${fgColor};
   background-color: ${bgColor};
-  width: 8em;
-  height: 2.5em;
+  width: ${props => props.width};
+  height: ${props => props.height};
+  flex: ${props => props.flex};
+  cursor: ${props => props.cursor};
 `;
 
 StyledButton.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes)
 }
 
 StyledButton.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  height: '2.5em',
+  width: '8em',
+  flex: 'none',
+  cursor: 'pointer'
 }
 
-export default ({children, onClick, variant}) => (
-  <StyledButton {...{onClick, variant}}>
-    {children}
-  </StyledButton>
-);
+export default (props) => {
+  const {children, ...rest} = props;
+  return (
+    <StyledButton {...rest}>
+      {children}
+    </StyledButton>
+  )
+};

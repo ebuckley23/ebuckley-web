@@ -17,15 +17,15 @@ export const media = Object.keys(mediaSizes).reduce((acc, label) => {
   return acc
 }, {});
 
-export const themeVariantTypes = {
-  default: 'default',
-  primary: 'primary',
-  secondary: 'secondary',
-  tertiary: 'tertiary',
-  success: 'success',
-  warning: 'warning',
-  error: 'error'
-}
+export const themeVariantTypes = [
+  'default',
+  'primary',
+  'secondary',
+  'tertiary',
+  'success',
+  'warning',
+  'error'
+]
 
 export const appMode = {
   light: 'light',

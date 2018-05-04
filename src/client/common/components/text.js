@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {themeVariantTypes} from '../../constants';
 import colors from '../colors';
 
+const alignProps = ['left', 'center', 'right'];
+
 const {
   white,
   black,
@@ -18,58 +20,63 @@ const {
 } = colors;
 
 const color = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: black, dark: white},
-  [themeVariantTypes.primary]: {light: blue, dark: white},
-  [themeVariantTypes.secondary]: {light: purple, dark: white},
-  [themeVariantTypes.tertiary]: {light: darkGreen, dark: white}
+  default: {light: black, dark: white},
+  primary: {light: blue, dark: white},
+  secondary: {light: purple, dark: white},
+  tertiary: {light: darkGreen, dark: white}
 });
 
 const StyledText = styled.span`
+  text-align: ${props => props.align};
   color: ${color};
+  text-decoration: ${props => props.decoration};
 `;
 
-const StyledH1 = styled.h1`
-  color: ${color};
-`;
+const StyledH1 = StyledText.withComponent('h1');
 
-const StyledH2 = styled.h2`
-  color: ${color};
-`;
+const StyledH2 = StyledText.withComponent('h2');
 
-const StyledLabel = styled.label`
-  color: ${color};
-`;
+const StyledLabel = StyledText.withComponent('label');
 
 StyledText.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes),
+  align: PropTypes.oneOf(alignProps)
 }
 
 StyledText.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  align: alignProps[0],
+  decoration: 'none'
 }
 
 StyledH1.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes),
+  align: PropTypes.oneOf(alignProps)
 }
 
 StyledH1.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  align: alignProps[1]
 }
 
 StyledH2.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes),
+  align: PropTypes.oneOf(alignProps)
 }
 
 StyledH2.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  align: alignProps[1]
 }
 
 StyledLabel.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes),
+  align: PropTypes.oneOf(alignProps)
 }
 
 StyledLabel.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  align: alignProps[0]
 }
 
 export default class Text extends PureComponent {

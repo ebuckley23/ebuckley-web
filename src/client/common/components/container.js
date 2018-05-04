@@ -8,19 +8,23 @@ import colors from '../colors';
 const {white, black} = colors;
 
 const bgColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: white, dark: black}
+  default: {light: white, dark: black}
 });
 
 const StyledContainer = styled.div`
   background-color: ${bgColor};
+  height: ${props => props.height};
+  width: ${props => props.width};
 `;
 
 StyledContainer.propTypes = {
-  variant: PropTypes.oneOf([themeVariantTypes.default])
+  variant: PropTypes.oneOf(['default'])
 };
 
 StyledContainer.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  height: '100vh',
+  width: '100%'
 };
 
 export default ({children, variant}) => (

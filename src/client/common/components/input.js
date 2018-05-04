@@ -17,50 +17,56 @@ const {
 } = colors;
 
 const bgColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: white, dark: black},
-  [themeVariantTypes.primary]: {light: white, dark: black},
-  [themeVariantTypes.success]: {light: white, dark: black},
-  [themeVariantTypes.warning]: {light: white, dark: black},
-  [themeVariantTypes.error]: {light: white, dark: black}
+  default: {light: white, dark: black},
+  primary: {light: white, dark: black},
+  success: {light: white, dark: black},
+  warning: {light: white, dark: black},
+  error: {light: white, dark: black}
 });
 
 const borderColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: black, dark: white},
-  [themeVariantTypes.primary]: {light: blue, dark: grey},
-  [themeVariantTypes.success]: {light: green, dark: green},
-  [themeVariantTypes.warning]: {light: yellow, dark: yellow},
-  [themeVariantTypes.error]: {light: red, dark: red}
+  default: {light: black, dark: white},
+  primary: {light: blue, dark: grey},
+  success: {light: green, dark: green},
+  warning: {light: yellow, dark: yellow},
+  error: {light: red, dark: red}
 });
 
 const fgColor = theme.variants('mode', 'variant', {
-  [themeVariantTypes.default]: {light: black, dark: white},
-  [themeVariantTypes.primary]: {light: blue, dark: grey},
-  [themeVariantTypes.success]: {light: green, dark: green},
-  [themeVariantTypes.warning]: {light: yellow, dark: yellow},
-  [themeVariantTypes.error]: {light: red, dark: red}
+  default: {light: black, dark: white},
+  primary: {light: blue, dark: white},
+  success: {light: green, dark: white},
+  warning: {light: yellow, dark: white},
+  error: {light: red, dark: white}
 });
 
-const StyledInput = styled.input`
+const StyledInput = styled.input.attrs({
+  type: props => props.type
+})`
   color: ${fgColor};
   background-color: ${bgColor};
-  border: solid ${borderColor};
+  border: 2px solid ${borderColor};
+  flex: ${props => props.flex};
+  padding: 1em 1em;
+  margin: 8px 0;
+  display: flex;
+  border-radius: 4px;
+  box-sizing: border-box;
 `;
 
 StyledInput.propTypes = {
-  variant: PropTypes.oneOf(Object.values(themeVariantTypes))
+  variant: PropTypes.oneOf(themeVariantTypes),
+  type: PropTypes.oneOf(['text', 'password', 'email'])
 }
 
 StyledInput.defaultProps = {
-  variant: themeVariantTypes.default
+  variant: 'default',
+  type: 'text',
+  flex: 'none'
 }
 
-export default ({onChange, variant, value, placeholder}) => {
+export default (props) => {
   return (
-    <StyledInput {...{
-      onChange,
-      variant,
-      value,
-      placeholder
-    }} />
+    <StyledInput {...props} />
   )
 }

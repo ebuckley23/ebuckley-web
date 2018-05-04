@@ -1,20 +1,20 @@
 import React, {PureComponent} from 'react';
 import {themeVariantTypes} from '../constants';
-import {Text} from '../common';
+import {Text, Flex} from '../common';
 
 export default function renderStyles(Component) {
   return class extends PureComponent {
     render() {
       const {children, ...rest} = this.props;
       return (
-        Object.values(themeVariantTypes).reduce((acc, variant, idx) => {
+        themeVariantTypes.reduce((acc, variant, idx) => {
           const style = (
-            <div key={idx}>
-              <Text.Label>{variant}</Text.Label>
+            <Flex.Column key={idx} flex={1}>
+              <Text.Label decoration={'underline'}>{variant}</Text.Label>
               <Component {...{...rest, variant}}>
                 {children}
               </Component>
-            </div>
+            </Flex.Column>
           );
           return acc.concat(style);
         }, [])

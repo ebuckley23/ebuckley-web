@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
-import {Button, Input, Text, Container} from '../common';
+import {Button, Input, Text, Container, Flex, Select} from '../common';
 import {themeVariantTypes} from '../constants';
 import * as styleGuideActions from '../actions/my-style-guide';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import renderStyles from './styles';
+import renderStyles from './renderStyles';
 
 export class MyStyleGuide extends PureComponent {
   render() {
@@ -12,16 +12,29 @@ export class MyStyleGuide extends PureComponent {
     const ButtonStyles = renderStyles(Button);
     const InputStyles = renderStyles(Input);
     const TextStyles = renderStyles(Text);
+    const SelectStyles = renderStyles(Select);
     return (
       <Container>
         <Text.H1>Style Guide and Themes</Text.H1>
-        <button onClick={() => actions.changeMode()}>{`Theme - ${web.mode}`}</button>
+        <button onClick={actions.changeMode}>{`Theme - ${web.mode}`}</button>
         <Text.H2>Buttons</Text.H2>
-        <ButtonStyles>A Button!</ButtonStyles>
+        <Flex.Row>
+          <ButtonStyles>A Button!</ButtonStyles>
+        </Flex.Row>
         <Text.H2>Input</Text.H2>
-        <InputStyles placeholder={'Enter Text'}/>
+        <Flex.Row>
+          <InputStyles placeholder={'Enter Text'}/>
+        </Flex.Row>
         <Text.H2>Text</Text.H2>
-        <TextStyles>Emmanuel</TextStyles>
+        <Flex.Row>
+          <TextStyles>Emmanuel</TextStyles>
+        </Flex.Row>
+        <Text.H2>Select</Text.H2>
+        <Flex.Row>
+          <SelectStyles
+            placeholder={'Select ...'}
+            options={[{display: 'Emmanuel', value: 1}, {display: 'Another Val', value: 2}]}/>
+        </Flex.Row>
       </Container>
     );
   }
