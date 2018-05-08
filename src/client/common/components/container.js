@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import styled from 'styled-components';
 import theme from 'styled-theming';
 import PropTypes from 'prop-types';
@@ -24,11 +24,15 @@ StyledContainer.propTypes = {
 StyledContainer.defaultProps = {
   variant: 'default',
   height: '100vh',
-  width: '100%'
+  width: 'inherit'
 };
-
-export default ({children, variant}) => (
-  <StyledContainer {...{variant}}>
-    {children}
-  </StyledContainer>
-) 
+export default class Container extends PureComponent {
+  render = () => {
+    const {children, ...rest} = this.props;
+    return (
+      <StyledContainer {...rest}>
+        {children}
+      </StyledContainer>
+    )
+  }
+}

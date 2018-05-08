@@ -15,6 +15,6 @@ export default (state = getInitialState(), action) => {
 const getInitialState = () => {
   return {
     default: 'loaded',
-    mode: appMode.light
+    mode: appMode.ebuckley
   }
 }

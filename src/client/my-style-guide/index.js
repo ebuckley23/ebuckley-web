@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import renderStyles from './renderStyles';
 
-export class MyStyleGuide extends PureComponent {
+class MyStyleGuide extends PureComponent {
   render() {
     const {mode, web, actions} = this.props;
     const ButtonStyles = renderStyles(Button);

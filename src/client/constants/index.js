@@ -1,3 +1,5 @@
+import {css} from 'styled-components';
+
 const mediaSizes = {
   desktop: 992,
   tablet: 768,
@@ -29,5 +31,6 @@ export const themeVariantTypes = [
 
 export const appMode = {
   light: 'light',
-  dark: 'dark'
+  dark: 'dark',
+  ebuckley: 'ebuckley'
 }

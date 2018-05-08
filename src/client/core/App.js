@@ -8,6 +8,8 @@ import Theme from './components/Theme';
 import {appMode} from '../constants';
 import AsyncComponent from './components/AsyncComponent';
 
+import Web from './Web';
+
 const MyStyleGuide = AsyncComponent(_ => import('../my-style-guide'));
 const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -22,6 +24,12 @@ const configureStore = (initialState) => {
     );
 }
 
+const AppRoutes = () => (
+  <Switch>
+    <Route exact path='/' render={(props) => <div>Test page</div>} />
+    <Route exact path='/style-guide' component={MyStyleGuide} />
+  </Switch>
+);
 export default class App extends PureComponent {
   render() {
     return (
@@ -30,12 +38,16 @@ export default class App extends PureComponent {
           <Route render={(props) => {
             return (
               <Theme {...props}>
-                <Switch>
-                  <Route exact path='/' render={(props) => {
-                    return (<div>Test Page</div>)
-                  }} />
-                  <Route exact path='/my-style-guide' component={MyStyleGuide} />
-                </Switch>
+                <Route render={(props) => {
+                  return (
+                    // pass props, specifically location prop so that
+                    // outer component doesn't block the rest of routes
+                    // from updating
+                    <Web {...props}>
+                      <AppRoutes />
+                    </Web>
+                    )
+                }} />
               </Theme>
             )
           }} />

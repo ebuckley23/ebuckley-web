@@ -6,6 +6,7 @@ const StyledFlex = styled.div`
   display: flex;
   flex: ${props => props.flex};
   flex-wrap: wrap;
+  align-items: ${props => props.alignItems};
 `;
 
 const StyledFlexRow = StyledFlex.extend`
@@ -17,7 +18,8 @@ const StyledFlexColumn = StyledFlex.extend`
 `;
 
 StyledFlex.defaultProps = {
-  flex: 'none'
+  flex: 1,
+  alignItems: 'none'
 }
 
 export default class extends PureComponent {
