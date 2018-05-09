@@ -20,7 +20,7 @@ const {
 } = colors;
 
 const color = theme.variants('mode', 'variant', {
-  default: {light: black, dark: white, ebuckley: white},
+  default: {light: black, dark: white, ebuckley: black},
   primary: {light: blue, dark: white},
   secondary: {light: purple, dark: white},
   tertiary: {light: darkGreen, dark: white}

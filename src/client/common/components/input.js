@@ -48,7 +48,6 @@ const StyledInput = styled.input.attrs({
   border: 2px solid ${borderColor};
   flex: ${props => props.flex};
   padding: 1em 1em;
-  margin: 8px 0;
   display: flex;
   border-radius: 4px;
   box-sizing: border-box;

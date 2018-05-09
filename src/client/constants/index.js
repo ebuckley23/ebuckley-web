@@ -29,8 +29,19 @@ export const themeVariantTypes = [
   'error'
 ]
 
-export const appMode = {
+export const appTheme = {
   light: 'light',
   dark: 'dark',
   ebuckley: 'ebuckley'
 }
+
+export const displayAppThemes = [{
+  value: appTheme.light,
+  display: 'Theme - Light'
+}, {
+  value: appTheme.dark,
+  display: 'Theme - Dark'
+}, {
+  value: appTheme.ebuckley,
+  display: 'Theme - Ebuckley'
+}]

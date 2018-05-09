@@ -7,5 +7,9 @@ export default {
   green: 'green',
   darkGreen: 'darkgreen',
   yellow: 'yellow',
-  grey: 'grey'
+  grey: 'grey',
+  mabared: '#812B38',
+  mabablue: '#2F489B',
+  mabagrey: '#676884',
+  lightgrey: 'lightgrey'
 }

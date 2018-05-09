@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import styled from 'styled-components';
 import Menu from './Menu';
+import MetaHeader from '../meta';
 import * as webActions from '../actions/web';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -20,6 +21,7 @@ class Web extends PureComponent {
   render = () => {
     return (
       <>
+        <MetaHeader />
         <Menu />
         <StyledContainer>
           {this.props.children}

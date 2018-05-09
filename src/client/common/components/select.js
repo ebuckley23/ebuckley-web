@@ -7,7 +7,6 @@ import colors from '../colors';
 
 const StyledSelect = styled.select`
   padding: 1em 1em;
-  margin: 8px 0;
   display: flex;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -24,15 +23,17 @@ StyledSelect.defaultProps = {
 
 export default class Select extends PureComponent {
   render() {
-    const {children, placeholder, placeholderEnabled = false, options = [], ...rest} = this.props;
+    const {children, placeholder, placeholderEnabled = false, options = [], onChange, ...rest} = this.props;
     //TODO: Fix
-    const displayOptions = placeholder ? options.unshift({display: placeholder, value: 0}) : options;
+    const displayOptions = placeholder
+      ? options.unshift({display: placeholder, value: 0})
+      : options;
     return (
-      <StyledSelect {...rest}>
+      <StyledSelect onChange={e => onChange(e, {value: e.target.value})} {...rest}>
         {options.map((item, idx) => {
           const disabled = item.value === 0 && !placeholderEnabled;
           return (
-            <option {...{disabled}} key={idx}>{item.display}</option>
+            <option {...{disabled}} key={idx} value={item.value}>{item.display}</option>
           )
         })}
       </StyledSelect>

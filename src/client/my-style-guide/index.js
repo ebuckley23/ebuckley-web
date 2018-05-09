@@ -16,7 +16,6 @@ class MyStyleGuide extends PureComponent {
     return (
       <Container>
         <Text.H1>Style Guide and Themes</Text.H1>
-        <button onClick={actions.changeMode}>{`Theme - ${web.mode}`}</button>
         <Text.H2>Buttons</Text.H2>
         <Flex.Row>
           <ButtonStyles>A Button!</ButtonStyles>

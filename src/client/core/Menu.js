@@ -1,43 +1,9 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import styled from 'styled-components';
 import {withRouter} from 'react-router';
-import {media} from '../constants';
 import {Flex, Text} from '../common';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-
-const StyledMenu = styled.header`
-  position: relative;
-  height: 10em;
-  background-image: linear-gradient(darkRed, lightgrey, darkblue);
-  border-bottom-left-radius: 50% 20%;
-  border-bottom-right-radius: 50% 20%;
-`;
-
-const StyledMenuItem = styled.a`
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px; 
-  line-height: 25px;
-  border-radius: 4px;
-  width: ${props => props.width || '100%'};
-  cursor: pointer;
-`;
-
-const StyledImage = styled.img`
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  flex: 1;
-  color: white;
-  cursor: pointer;
-`;
+import * as Styled from './styled-components';
 
 const MenuItem = ({children, onClick, ...rest}) => {
   const menuClick = ({name, to}) => {
@@ -45,9 +11,9 @@ const MenuItem = ({children, onClick, ...rest}) => {
   }
   return (
     <Flex>
-      <StyledMenuItem {...rest} onClick={menuClick(rest)}>
+      <Styled.MenuItem {...rest} onClick={menuClick(rest)}>
         {children}
-      </StyledMenuItem>
+      </Styled.MenuItem>
     </Flex>
   )
 }
@@ -73,8 +39,8 @@ class Menu extends PureComponent {
   render = () => {
     const {activeIndex} = this.state;
     return (
-      <StyledMenu>
-        <Flex.Row alignItems={'center'}>
+      <Styled.Menu>
+        <Styled.HeaderRow alignItems={'center'}>
           <Flex.Row>
             <MenuItem
               name='home'
@@ -94,25 +60,25 @@ class Menu extends PureComponent {
           </Flex.Row>
           <Flex>
             <MenuItem>
-              <StyledImage src={require('../../../MABA Team.png')} />
+              <Styled.Image src={'https://ebuckley.blob.core.windows.net/images/mabateam.png'} />
             </MenuItem>
           </Flex>
           <Flex.Row>
             <MenuItem width={'25%'}>
-              <StyledIcon icon={['fab', 'linkedin']} size='lg' />
+              <Styled.Icon icon={['fab', 'linkedin']} size='lg' />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <StyledIcon icon={['fab', 'facebook']} size='lg' />
+              <Styled.Icon icon={['fab', 'facebook']} size='lg' />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <StyledIcon icon={['fab', 'instagram']} size='lg' />
+              <Styled.Icon icon={['fab', 'instagram']} size='lg' />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <StyledIcon icon={['fab', 'snapchat-square']} size='lg' />
+              <Styled.Icon icon={['fab', 'snapchat-square']} size='lg' />
             </MenuItem>
           </Flex.Row>
-        </Flex.Row>
-      </StyledMenu>
+        </Styled.HeaderRow>
+      </Styled.Menu>
     )
   }
 }
