@@ -5,13 +5,10 @@ import MetaHeader from '../meta';
 import * as webActions from '../actions/web';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Container} from '../common';
-
-const StyledContainer = styled(Container)`
-  margin: 0 15em;
-  min-height: 30em;
-  height: inherit;
-`;
+import * as Styled from './styled-components';
+import DropDown from './components/DropDown';
+import {menuConfig} from './config';
+import {withRouter} from 'react-router';
 
 class Web extends PureComponent {
   componentWillMount() {
@@ -19,13 +16,20 @@ class Web extends PureComponent {
     actions.getEbuckley();
   }
   render = () => {
+    const {socialDDVisible, navDDVisible, history, location, actions} = this.props;
     return (
       <>
-        <MetaHeader />
-        <Menu />
-        <StyledContainer>
+        <MetaHeader {...this.props}/>
+        <Menu {...this.props} />
+        <DropDown
+          {...this.props}
+          onAfterClick={actions.toggleNavDropDown}
+          toggled={navDDVisible}
+          options={menuConfig} />
+        <DropDown toggled={socialDDVisible} options={[]} />
+        <Styled.MainContainer>
           {this.props.children}
-        </StyledContainer>
+        </Styled.MainContainer>
       </>
     )
   }
@@ -33,7 +37,9 @@ class Web extends PureComponent {
 
 const mapState = (state) => {
   return {
-    web: state.web
+    web: state.web,
+    socialDDVisible: state.web.socialDDVisible,
+    navDDVisible: state.web.navDDVisible
   }
 }
 
@@ -42,4 +48,4 @@ const mapActions = (dispatch) => {
     actions: bindActionCreators({...webActions}, dispatch)
   }
 }
-export default connect(mapState, mapActions)(Web);
+export default withRouter(connect(mapState, mapActions)(Web));

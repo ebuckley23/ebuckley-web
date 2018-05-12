@@ -14,7 +14,7 @@ class MyStyleGuide extends PureComponent {
     const TextStyles = renderStyles(Text);
     const SelectStyles = renderStyles(Select);
     return (
-      <Container>
+      <>
         <Text.H1>Style Guide and Themes</Text.H1>
         <Text.H2>Buttons</Text.H2>
         <Flex.Row>
@@ -34,7 +34,7 @@ class MyStyleGuide extends PureComponent {
             placeholder={'Select ...'}
             options={[{display: 'Emmanuel', value: 1}, {display: 'Another Val', value: 2}]}/>
         </Flex.Row>
-      </Container>
+      </>
     );
   }
 }

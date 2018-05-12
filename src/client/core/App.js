@@ -11,6 +11,8 @@ import AsyncComponent from './components/AsyncComponent';
 import Web from './Web';
 
 const MyStyleGuide = AsyncComponent(_ => import('../my-style-guide'));
+const Resume = AsyncComponent(_ => import('../resume'));
+
 const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
   : _ => _;
@@ -26,7 +28,7 @@ const configureStore = (initialState) => {
 
 const AppRoutes = () => (
   <Switch>
-    <Route exact path='/' render={(props) => <div>Test page</div>} />
+    <Route exact path='/' component={Resume} />
     <Route exact path='/style-guide' component={MyStyleGuide} />
   </Switch>
 );

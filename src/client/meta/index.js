@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react';
 import styled from 'styled-components';
 import * as webActions from '../actions/web';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import {Flex, Select} from '../common';
 import {displayAppThemes} from '../constants';
 import theme from 'styled-theming';
@@ -25,6 +23,7 @@ const StyledRow = styled(Flex.Row)`
   height: 1.5em;
   justify-content: flex-end;
   background-color: ${bgColor};
+  border-bottom: 1px groove white;
 `;
 
 const StyledSelect = styled(Select)`
@@ -38,7 +37,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-class Meta extends PureComponent {
+export default class Meta extends PureComponent {
   render = () => {
     const {web, actions} = this.props;
     return (
@@ -51,17 +50,3 @@ class Meta extends PureComponent {
     )
   }
 }
-
-const mapState = (state) => {
-  return {
-    web: state.web
-  }
-}
-
-const mapActions = (dispatch) => {
-  return {
-    actions: bindActionCreators({...webActions}, dispatch)
-  }
-}
-
-export default connect(mapState, mapActions)(Meta);

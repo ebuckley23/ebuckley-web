@@ -9,7 +9,13 @@ export default (state = getInitialState(), action) => {
       return {...state, mode};
     }
     case actionTypes.CHANGE_THEME: {
-      return {...state, mode: action.payload}
+      return {...state, mode: action.payload};
+    }
+    case actionTypes.TOGGLE_NAV_DROPDOWN: {
+      return {...state, navDDVisible: !state.navDDVisible, socialDDVisible: false};
+    }
+    case actionTypes.TOGGLE_SOCIAL_DROPDOWN: {
+      return {...state, socialDDVisible: !state.socialDDVisible, navDDVisible: false};
     }
     default: return state;
   }
@@ -18,6 +24,8 @@ export default (state = getInitialState(), action) => {
 const getInitialState = () => {
   return {
     default: 'loaded',
+    socialDDVisible: false,
+    navDDVisible: false,
     mode: appTheme.ebuckley
   }
 }

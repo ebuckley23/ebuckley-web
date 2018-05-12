@@ -7,6 +7,7 @@ const StyledFlex = styled.div`
   flex: ${props => props.flex};
   flex-wrap: wrap;
   align-items: ${props => props.alignItems};
+  justify-content: ${props => props.justify};
 `;
 
 const StyledFlexRow = StyledFlex.extend`

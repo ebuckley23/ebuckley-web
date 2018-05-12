@@ -1,98 +1,78 @@
 import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
-import {Flex, Text} from '../common';
+import {Flex, Text, Select} from '../common';
+import DropDown from './components/DropDown';
+import MenuItem from './components/MenuItem';
 import * as Styled from './styled-components';
+import {menuConfig} from './config';
 
-const MenuItem = ({children, onClick, ...rest}) => {
-  const menuClick = ({name, to}) => {
-    return (e) => onClick(e, {name, to});
-  }
-  return (
-    <Flex>
-      <Styled.MenuItem {...rest} onClick={menuClick(rest)}>
-        {children}
-      </Styled.MenuItem>
-    </Flex>
-  )
-}
-
-const menuOrder = {
-  'home': 0,
-  'style-guide': 1
-};
-
-class Menu extends PureComponent {
+export default class Menu extends PureComponent {
   state = {
     activeIndex: 0
   }
+
+  MenuItems = () => {
+    const {activeIndex} = this.state;
+    return menuConfig.map(({displayOrder, name, path, displayName}, idx) => {
+      return (
+        <MenuItem
+          key={displayOrder}
+          name={name}
+          to={path}
+          active={displayOrder === activeIndex}
+          onClick={(e, {name, to}) => this.navigate(to, path)}>
+          <Text>{displayName}</Text>
+        </MenuItem>
+      )
+    });
+  }
+
   componentDidMount() {
     const {location: {pathname = ''}} = this.props;
     const parsedPathName = pathname.replace('/', '');
-    parsedPathName && this.setState({activeIndex: menuOrder[parsedPathName]});
+    parsedPathName && this.setState({activeIndex: menuConfig[parsedPathName]});
   }
+
   navigate = (to, menuItemIndex) => {
     const {history} = this.props;
     this.setState({activeIndex: menuItemIndex}, () => history.push(to));
   }
+
   render = () => {
     const {activeIndex} = this.state;
+    const {actions} = this.props;
     return (
       <Styled.Menu>
         <Styled.HeaderRow alignItems={'center'}>
-          <Flex.Row>
-            <MenuItem
-              name='home'
-              to='/'
-              active={menuOrder['home'] === activeIndex}
-              onClick={(e, {name, to}) => this.navigate(to, menuOrder[name])}>
-              <Text>Home</Text>
+          <Styled.NavRow>{this.MenuItems()}</Styled.NavRow>
+          <Styled.MobileNavRow>
+            <MenuItem onClick={actions.toggleNavDropDown}>
+              <Styled.HamburgerIcon/>
             </MenuItem>
-            <MenuItem
-              name='style-guide'
-              active={menuOrder['style-guide'] === activeIndex}
-              to='style-guide'
-              position='right'
-              onClick={(e, {name, to}) => this.navigate(to, menuOrder[name])}>
-              <Text>Style Guide</Text>
-            </MenuItem>
+          </Styled.MobileNavRow>
+          <Flex.Row justify={'center'}>
+            <Styled.Image src={'https://ebuckley.blob.core.windows.net/images/mabateam.png'} />
           </Flex.Row>
-          <Flex>
-            <MenuItem>
-              <Styled.Image src={'https://ebuckley.blob.core.windows.net/images/mabateam.png'} />
-            </MenuItem>
-          </Flex>
-          <Flex.Row>
+          <Styled.NavRow>
             <MenuItem width={'25%'}>
-              <Styled.Icon icon={['fab', 'linkedin']} size='lg' />
+              <Styled.Icon icon={['fab', 'linkedin']} />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <Styled.Icon icon={['fab', 'facebook']} size='lg' />
+              <Styled.Icon icon={['fab', 'facebook']} />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <Styled.Icon icon={['fab', 'instagram']} size='lg' />
+              <Styled.Icon icon={['fab', 'instagram']} />
             </MenuItem>
             <MenuItem width={'25%'}>
-              <Styled.Icon icon={['fab', 'snapchat-square']} size='lg' />
+              <Styled.Icon icon={['fab', 'snapchat-square']} />
             </MenuItem>
-          </Flex.Row>
+          </Styled.NavRow>
+          <Styled.MobileNavRow>
+            <MenuItem onClick={actions.toggleSocialDropDown}>
+              <Styled.SocialIcon />
+            </MenuItem>
+          </Styled.MobileNavRow>
         </Styled.HeaderRow>
       </Styled.Menu>
     )
   }
 }
-
-const mapState = (state) => {
-  return {
-
-  }
-}
-
-const mapActions = (dispatch) => {
-  return {
-    actions: bindActionCreators({}, dispatch)
-  }
-}
-
-export default withRouter(connect(mapState, mapActions)(Menu));
