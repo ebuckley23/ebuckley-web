@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import {media} from '../../constants';
-import colors from '../../common/colors';
 import theme from 'styled-theming';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {Flex, Container} from '../../common';
+import colors from '../../common/colors';
 
-const {mabared, mabagrey, mabablue, lightgrey, black, grey, white} = colors;
+const {
+  mabared, mabagrey, mabablue, lightgrey, black, grey, white
+} = colors;
 
 const firstGradient = theme('mode', {
   light: mabablue,
@@ -33,7 +34,7 @@ const imageBorderColor = theme('mode', {
   light: lightgrey,
   dark: white,
   ebuckley: mabagrey
-})
+});
 
 export const Menu = styled.header`
   position: relative;
@@ -132,7 +133,7 @@ export const DropDownContainer = styled.div`
   margin: auto;
   width: 50%;
   height: max-content;
-  display: ${props => props.toggled ? 'flex' : 'none'};
+  display: ${props => (props.toggled ? 'flex' : 'none')};
   flex-direction: column;
   background-color: transparent;
   opacity: .95;

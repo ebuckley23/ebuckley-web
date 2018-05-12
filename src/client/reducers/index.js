@@ -3,4 +3,4 @@ import web from './web';
 
 export default combineReducers({
   web
-})
+});

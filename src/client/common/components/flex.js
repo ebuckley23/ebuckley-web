@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const StyledFlex = styled.div`
   display: flex;
@@ -21,13 +20,13 @@ const StyledFlexColumn = StyledFlex.extend`
 StyledFlex.defaultProps = {
   flex: 1,
   alignItems: 'none'
-}
+};
 
 export default class extends PureComponent {
-  static Row = StyledFlex;
+  static Row = StyledFlexRow;
   static Column = StyledFlexColumn;
   render() {
     const {children, ...rest} = this.props;
-    return (<StyledFlexColumn {...rest}>{children}</StyledFlexColumn>)
+    return (<StyledFlexColumn {...rest}>{children}</StyledFlexColumn>);
   }
 }

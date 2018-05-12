@@ -2,10 +2,11 @@ import React, {PureComponent} from 'react';
 import styled from 'styled-components';
 import theme from 'styled-theming';
 import PropTypes from 'prop-types';
-import {themeVariantTypes} from '../../constants';
 import colors from '../colors';
 
-const {white, black, grey, mabablue, mabared, mabagrey, lightgrey} = colors;
+const {
+  white, black, grey, mabablue, mabared, mabagrey, lightgrey
+} = colors;
 
 const firstGradient = theme('mode', {
   light: mabablue,
@@ -52,6 +53,6 @@ export default class Container extends PureComponent {
       <StyledContainer {...rest}>
         {children}
       </StyledContainer>
-    )
+    );
   }
 }

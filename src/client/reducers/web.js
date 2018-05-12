@@ -1,10 +1,17 @@
 import {appTheme} from '../constants';
 import * as actionTypes from '../constants/actionTypes';
 
+const getInitialState = () => ({
+  default: 'loaded',
+  socialDDVisible: false,
+  navDDVisible: false,
+  mode: appTheme.ebuckley
+});
+
 export default (state = getInitialState(), action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STYLE_GUIDE_MODE: {
-      //todo: drive by dropdown
+      // todo: drive by dropdown
       const mode = state.mode === appTheme.light ? appTheme.dark : appTheme.light;
       return {...state, mode};
     }
@@ -19,13 +26,4 @@ export default (state = getInitialState(), action) => {
     }
     default: return state;
   }
-}
-
-const getInitialState = () => {
-  return {
-    default: 'loaded',
-    socialDDVisible: false,
-    navDDVisible: false,
-    mode: appTheme.ebuckley
-  }
-}
+};

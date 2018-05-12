@@ -1,10 +1,9 @@
 import React, {PureComponent} from 'react';
 import styled from 'styled-components';
-import * as webActions from '../actions/web';
-import {Flex, Select} from '../common';
-import {displayAppThemes} from '../constants';
 import theme from 'styled-theming';
 import colors from '../common/colors';
+import {Flex, Select} from '../common';
+import {displayAppThemes} from '../constants';
 
 const {black, mabared, white} = colors;
 const bgColor = theme('mode', {
@@ -17,7 +16,7 @@ const color = theme('mode', {
   light: white,
   dark: 'limegreen',
   ebuckley: 'deepskyblue'
-})
+});
 
 const StyledRow = styled(Flex.Row)`
   height: 1.5em;
@@ -45,8 +44,9 @@ export default class Meta extends PureComponent {
         <StyledSelect
           onChange={(e, {value}) => actions.changeTheme(value)}
           value={web.mode}
-          options={displayAppThemes} />
+          options={displayAppThemes}
+        />
       </StyledRow>
-    )
+    );
   }
 }

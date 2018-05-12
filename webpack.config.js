@@ -6,9 +6,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: ['babel-loader', 'eslint-loader']
       },
       {
         test: /\.css$/,
@@ -36,7 +34,7 @@ module.exports = {
     port: 5000,
     open: true,
     proxy: {
-      "/": "http://localhost:8080"
+      '/': 'http://localhost:8080'
     }
   },
   plugins: [
@@ -44,4 +42,4 @@ module.exports = {
       template: './src/index.html'
     })
   ]
-}
+};

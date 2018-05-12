@@ -4,7 +4,7 @@ const mediaSizes = {
   desktop: 992,
   tablet: 768,
   phone: 376
-}
+};
 
 /**
  * Take from styled components documentation
@@ -15,8 +15,8 @@ export const media = Object.keys(mediaSizes).reduce((acc, label) => {
     @media (max-width: ${mediaSizes[label] / 16}em) {
       ${css(...args)}
     }
-  `
-  return acc
+  `;
+  return acc;
 }, {});
 
 export const themeVariantTypes = [
@@ -27,13 +27,13 @@ export const themeVariantTypes = [
   'success',
   'warning',
   'error'
-]
+];
 
 export const appTheme = {
   light: 'light',
   dark: 'dark',
   ebuckley: 'ebuckley'
-}
+};
 
 export const displayAppThemes = [{
   value: appTheme.light,
@@ -44,4 +44,4 @@ export const displayAppThemes = [{
 }, {
   value: appTheme.ebuckley,
   display: 'Theme - Ebuckley'
-}]
+}];

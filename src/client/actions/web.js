@@ -1,4 +1,4 @@
-import {api} from '../utils/api';
+import api from '../utils/api';
 import * as actionTypes from '../constants/actionTypes';
 
 export const getEbuckley = () => ({
@@ -6,7 +6,7 @@ export const getEbuckley = () => ({
   payload: api('/ebuckley').then(res => res.json())
 });
 
-export const changeTheme = (theme) => ({
+export const changeTheme = theme => ({
   type: actionTypes.CHANGE_THEME,
   payload: theme
 });

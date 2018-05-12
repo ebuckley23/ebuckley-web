@@ -23,14 +23,14 @@ async function baseFetch(url, options = {}) {
     })
   });
 
-  return fetch(req).then(res => {
+  return fetch(req).then((res) => {
     if (!res.ok) {
       throw Error(res.statusText);
     }
     return res;
-  })
+  });
 }
 
-export function api(url, options) {
+export default function api(url, options) {
   return baseFetch(`/api${url}`, options);
 }

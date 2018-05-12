@@ -9,7 +9,6 @@ const {
   white,
   black,
   green,
-  darkGreen,
   blue,
   red,
   yellow,
@@ -56,16 +55,14 @@ const StyledInput = styled.input.attrs({
 StyledInput.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes),
   type: PropTypes.oneOf(['text', 'password', 'email'])
-}
+};
 
 StyledInput.defaultProps = {
   variant: 'default',
   type: 'text',
   flex: 'none'
-}
+};
 
-export default (props) => {
-  return (
-    <StyledInput {...props} />
-  )
-}
+export default props => (
+  <StyledInput {...props} />
+);

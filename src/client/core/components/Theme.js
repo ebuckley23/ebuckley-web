@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {ThemeProvider} from 'styled-components';
 
@@ -10,13 +9,12 @@ export class Theme extends PureComponent {
       <ThemeProvider theme={{mode}}>
         {children}
       </ThemeProvider>
-    )
+    );
   }
 }
 
-const mapState = (state) => {
-  return {
-    mode: state.web.mode
-  }
-}
+const mapState = state => ({
+  mode: state.web.mode
+});
+
 export default connect(mapState)(Theme);

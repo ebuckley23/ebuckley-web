@@ -12,4 +12,4 @@ export default {
   mabablue: '#2F489B',
   mabagrey: '#676884',
   lightgrey: 'lightgrey'
-}
+};

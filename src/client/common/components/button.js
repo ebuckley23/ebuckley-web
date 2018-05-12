@@ -9,7 +9,6 @@ const {
   white,
   black,
   green,
-  darkGreen,
   blue,
   red,
   yellow,
@@ -43,7 +42,7 @@ const StyledButton = styled.button`
 
 StyledButton.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes)
-}
+};
 
 StyledButton.defaultProps = {
   variant: 'default',
@@ -51,7 +50,7 @@ StyledButton.defaultProps = {
   width: '8em',
   flex: 'none',
   cursor: 'pointer'
-}
+};
 
 export default (props) => {
   const {children, ...rest} = props;
@@ -59,5 +58,5 @@ export default (props) => {
     <StyledButton {...rest}>
       {children}
     </StyledButton>
-  )
+  );
 };

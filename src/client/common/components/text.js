@@ -10,12 +10,8 @@ const alignProps = ['left', 'center', 'right'];
 const {
   white,
   black,
-  green,
   darkGreen,
   blue,
-  red,
-  yellow,
-  grey,
   purple
 } = colors;
 
@@ -41,43 +37,43 @@ const StyledLabel = StyledText.withComponent('label');
 StyledText.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes),
   align: PropTypes.oneOf(alignProps)
-}
+};
 
 StyledText.defaultProps = {
   variant: 'default',
   align: alignProps[0],
   decoration: 'none'
-}
+};
 
 StyledH1.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes),
   align: PropTypes.oneOf(alignProps)
-}
+};
 
 StyledH1.defaultProps = {
   variant: 'default',
   align: alignProps[1]
-}
+};
 
 StyledH2.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes),
   align: PropTypes.oneOf(alignProps)
-}
+};
 
 StyledH2.defaultProps = {
   variant: 'default',
   align: alignProps[1]
-}
+};
 
 StyledLabel.propTypes = {
   variant: PropTypes.oneOf(themeVariantTypes),
   align: PropTypes.oneOf(alignProps)
-}
+};
 
 StyledLabel.defaultProps = {
   variant: 'default',
   align: alignProps[0]
-}
+};
 
 export default class Text extends PureComponent {
   static H1 = StyledH1;
@@ -89,6 +85,6 @@ export default class Text extends PureComponent {
       <StyledText>
         {children}
       </StyledText>
-    )
+    );
   }
 }

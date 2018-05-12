@@ -7,10 +7,10 @@ export default function renderStyles(Component) {
     render() {
       const {children, ...rest} = this.props;
       return (
-        themeVariantTypes.reduce((acc, variant, idx) => {
+        themeVariantTypes.reduce((acc, variant) => {
           const style = (
-            <Flex.Column key={idx} flex={1}>
-              <Text.Label decoration={'underline'}>{variant}</Text.Label>
+            <Flex.Column key={variant} flex={1}>
+              <Text.Label decoration='underline'>{variant}</Text.Label>
               <Component {...{...rest, variant}}>
                 {children}
               </Component>
@@ -18,7 +18,7 @@ export default function renderStyles(Component) {
           );
           return acc.concat(style);
         }, [])
-      )
+      );
     }
-  }
+  };
 }
